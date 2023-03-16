@@ -1,22 +1,13 @@
-// 一个rust 选择排序示例
-
-fn selection_sort<T: Ord>(arr: &mut [T]) {
-    let len = arr.len();
-    for i in 0..len {
-        let mut min = i;
-        for j in i + 1..len {
-            if arr[j] < arr[min] {
-                min = j;
+// 选择排序
+fn selection_sort(arr: &mut Vec<i32>) {
+    let n = arr.len();
+    for i in 0..n {
+        let mut min_index = i;
+        for j in i + 1..n {
+            if arr[j] < arr[min_index] {
+                min_index = j;
             }
         }
-        if min != i {
-            arr.swap(i, min);
-        }
+        arr.swap(i, min_index);
     }
-}
-
-fn main() {
-    let mut arr = [5, 4, 3, 2, 1];
-    selection_sort(&mut arr);
-    println!("{:?}", arr);
 }

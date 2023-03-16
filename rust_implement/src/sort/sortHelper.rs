@@ -1,31 +1,3 @@
-use rand::Rng;
-use std::time::Instant;
-
-fn main() {
-    let n = 100222;
-    let range_l = 0;
-    let range_r = 100030;
-    let mut arr = generate_random_array(n, range_l, range_r);
-    if arr.len() < 100 {
-        print_array(&arr);
-    }
-    test_sort("Selection Sort", selection_sort, &mut arr);
-}
-
-// 选择排序
-fn selection_sort(arr: &mut Vec<i32>) {
-    let n = arr.len();
-    for i in 0..n {
-        let mut min_index = i;
-        for j in i + 1..n {
-            if arr[j] < arr[min_index] {
-                min_index = j;
-            }
-        }
-        arr.swap(i, min_index);
-    }
-}
-
 // 用于生成一个随机数组
 fn generate_random_array(n: usize, range_l: i32, range_r: i32) -> Vec<i32> {
     let mut arr = Vec::new();
