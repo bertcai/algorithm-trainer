@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var bubbleSort_1 = require("./bubbleSort");
 var insertionSort_1 = require("./insertionSort");
 var selectionSort_1 = require("./selectionSort");
 var sortHelper_1 = require("./sortHelper");
@@ -7,5 +8,7 @@ var helper = (0, sortHelper_1.SortHelper)();
 var n = 10000;
 var arr = helper.genNearlyOrdered(n, 100);
 var arr2 = JSON.parse(JSON.stringify(arr));
+var arr3 = JSON.parse(JSON.stringify(arr));
 helper.testSort('selection sort', selectionSort_1.selectionSort, arr, n);
 helper.testSort('insertion sort', insertionSort_1.insertionSort, arr2, n);
+helper.testSort('bubble sort', bubbleSort_1.bubbleSort, arr3, n);
