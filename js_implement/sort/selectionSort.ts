@@ -1,5 +1,5 @@
-let temp: any = NaN
 export const selectionSort = <T>(arr: T[], n: number) => {
+    let temp: T
     for (let i = 0; i < n; i++) {
         let minIndex = i
         for (let j = i + 1; j < n; j++) {

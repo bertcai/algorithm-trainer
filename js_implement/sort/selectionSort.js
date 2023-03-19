@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.selectionSort = void 0;
-var temp = NaN;
 var selectionSort = function (arr, n) {
+    var temp;
     for (var i = 0; i < n; i++) {
         var minIndex = i;
         for (var j = i + 1; j < n; j++) {
