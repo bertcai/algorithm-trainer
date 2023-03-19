@@ -1,6 +1,6 @@
 "use strict";
-exports.__esModule = true;
-var sortHelper_1 = require("./sortHelper");
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.selectionSort = void 0;
 var temp = NaN;
 var selectionSort = function (arr, n) {
     for (var i = 0; i < n; i++) {
@@ -15,8 +15,4 @@ var selectionSort = function (arr, n) {
         arr[minIndex] = temp;
     }
 };
-var helper = (0, sortHelper_1.SortHelper)();
-var n = 100000;
-var arr = helper.genRandom(n, 0, 100000);
-selectionSort(arr, n);
-helper.testSort('selectionSort', selectionSort, arr, n);
+exports.selectionSort = selectionSort;

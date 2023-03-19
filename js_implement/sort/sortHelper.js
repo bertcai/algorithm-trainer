@@ -1,15 +1,14 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 exports.SortHelper = void 0;
 var SortHelper = function () {
     // 生成有n个元素的随机数组,每个元素的随机范围为[rangeL, rangeR]
     var genRandom = function (n, rangeL, rangeR) {
         console.assert(rangeL < rangeR);
         var arr = new Array(n);
-        arr.map(function () {
-            return Math.random() * (rangeR - rangeL);
-        });
-        return arr;
+        arr.fill(10);
+        var b = arr.map(function (e) { return Math.random() * (rangeR - rangeL); });
+        return b;
     };
     // 判断arr数组是否有序
     var isSorted = function (arr, n) {

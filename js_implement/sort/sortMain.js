@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var insertionSort_1 = require("./insertionSort");
+var selectionSort_1 = require("./selectionSort");
+var sortHelper_1 = require("./sortHelper");
+var helper = (0, sortHelper_1.SortHelper)();
+var n = 10000;
+var arr = helper.genRandom(n, 0, n);
+var arr2 = JSON.parse(JSON.stringify(arr));
+helper.testSort('selection sort', selectionSort_1.selectionSort, arr, n);
+helper.testSort('insertion sort', insertionSort_1.insertionSort, arr2, n);

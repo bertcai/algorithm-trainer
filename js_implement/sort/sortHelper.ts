@@ -3,10 +3,9 @@ export const SortHelper = () => {
     const genRandom = (n, rangeL, rangeR) => {
         console.assert(rangeL < rangeR)
         const arr = new Array(n)
-        arr.map(() => {
-            return Math.random() * (rangeR - rangeL)
-        })
-        return arr
+        arr.fill(10)
+        const b = arr.map(e => Math.random() * (rangeR - rangeL))
+        return b
     }
     // 判断arr数组是否有序
     const isSorted = (arr, n) => {
