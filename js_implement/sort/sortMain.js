@@ -6,7 +6,7 @@ var selectionSort_1 = require("./selectionSort");
 var sortHelper_1 = require("./sortHelper");
 var helper = (0, sortHelper_1.SortHelper)();
 var n = 10000;
-var arr = helper.genNearlyOrdered(n, 100);
+var arr = helper.genNearlyOrdered(n, 2);
 var arr2 = JSON.parse(JSON.stringify(arr));
 var arr3 = JSON.parse(JSON.stringify(arr));
 helper.testSort('selection sort', selectionSort_1.selectionSort, arr, n);
