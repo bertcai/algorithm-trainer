@@ -7,6 +7,21 @@ export const SortHelper = () => {
         const b = arr.map(e => Math.random() * (rangeR - rangeL))
         return b
     }
+    // 生成一个近乎有序数组，只交换了n次顺序
+    const genNearlyOrdered = (n, swapTimes) => {
+        const arr = new Array(n)
+        for (let i = 0; i < n; i++) {
+            arr[i] = i
+        }
+        for (let i = 0; i < swapTimes; i++) {
+            const posx = Math.floor(Math.random() * n)
+            const posy = Math.floor(Math.random() * n)
+            const temp = arr[posx]
+            arr[posx] = arr[posy]
+            arr[posy] = temp
+        }
+        return arr
+    }
     // 判断arr数组是否有序
     const isSorted = (arr, n) => {
         for (let i = 0; i < n - 1; i++) {
@@ -27,6 +42,7 @@ export const SortHelper = () => {
     return {
         genRandom,
         testSort,
-        isSorted
+        isSorted,
+        genNearlyOrdered
     }
 }

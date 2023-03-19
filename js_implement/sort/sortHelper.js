@@ -10,6 +10,21 @@ var SortHelper = function () {
         var b = arr.map(function (e) { return Math.random() * (rangeR - rangeL); });
         return b;
     };
+    // 生成一个近乎有序数组，只交换了n次顺序
+    var genNearlyOrdered = function (n, swapTimes) {
+        var arr = new Array(n);
+        for (var i = 0; i < n; i++) {
+            arr[i] = i;
+        }
+        for (var i = 0; i < swapTimes; i++) {
+            var posx = Math.floor(Math.random() * n);
+            var posy = Math.floor(Math.random() * n);
+            var temp = arr[posx];
+            arr[posx] = arr[posy];
+            arr[posy] = temp;
+        }
+        return arr;
+    };
     // 判断arr数组是否有序
     var isSorted = function (arr, n) {
         for (var i = 0; i < n - 1; i++) {
@@ -30,7 +45,8 @@ var SortHelper = function () {
     return {
         genRandom: genRandom,
         testSort: testSort,
-        isSorted: isSorted
+        isSorted: isSorted,
+        genNearlyOrdered: genNearlyOrdered
     };
 };
 exports.SortHelper = SortHelper;
