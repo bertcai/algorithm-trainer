@@ -35,3 +35,13 @@
         }
     }
     ``` 
+
+```bash
+# 一次运行结果 n = 10022
+    Finished dev [unoptimized + debuginfo] target(s) in 0.21s
+     Running `target/debug/rust_implement`
+Selection Sort : 0.978031316 s
+Insertion Sort : 0.619047148 s
+Bubble Sort : 1.25344893 s
+Shell Sort : 0.00564654 s
+```
