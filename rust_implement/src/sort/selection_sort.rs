@@ -1,5 +1,5 @@
 // 选择排序
-fn selection_sort(arr: &mut Vec<i32>) {
+pub fn selection_sort(arr: &mut Vec<i32>) {
     let n = arr.len();
     for i in 0..n {
         let mut min_index = i;
