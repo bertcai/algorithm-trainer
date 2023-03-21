@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var bubbleSort_1 = require("./bubbleSort");
 var insertionSort_1 = require("./insertionSort");
+var mergeSort_1 = require("./mergeSort");
 var selectionSort_1 = require("./selectionSort");
 var shellSort_1 = require("./shellSort");
 var sortHelper_1 = require("./sortHelper");
@@ -11,7 +12,9 @@ var arr = helper.genNearlyOrdered(n, 1000);
 var arr2 = JSON.parse(JSON.stringify(arr));
 var arr3 = JSON.parse(JSON.stringify(arr));
 var arr4 = JSON.parse(JSON.stringify(arr));
+var arr5 = JSON.parse(JSON.stringify(arr));
 helper.testSort('selection sort', selectionSort_1.selectionSort, arr, n);
 helper.testSort('insertion sort', insertionSort_1.insertionSort, arr2, n);
 helper.testSort('bubble sort', bubbleSort_1.bubbleSort, arr3, n);
 helper.testSort('shell sort', shellSort_1.shellSort, arr4, n);
+helper.testSort('merge sort', mergeSort_1.mergeSort, arr5, n);
