@@ -4,6 +4,19 @@ export const mergeSort = <T>(arr: T[], n: number) => {
     __mergeSort(arr, 0, n - 1)
 }
 
+export const mergeSortBU = <T>(arr: T[], n: number) => {
+    for (let size = 1; size <= n; size += size) {
+        for (let i = 0; i + size < n; i += size + size) {
+            if (size + size <= 15) {
+                insertionSort(arr, i, Math.min(i + size + size - 1, n - 1))
+            }
+            if (arr[i + size - 1] > arr[i + size]) {
+                __merge(arr, i, i + size - 1, Math.min(i + size + size - 1, n - 1))
+            }
+        }
+    }
+}
+
 const __mergeSort = <T>(arr: T[], l: number, r: number) => {
     if (r - l <= 15) {
         insertionSort(arr, l, r)
