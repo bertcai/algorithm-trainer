@@ -6,7 +6,7 @@ import { shellSort } from "./shellSort"
 import { SortHelper } from "./sortHelper"
 
 const helper = SortHelper()
-const n = 10000
+const n = 50000
 const arr = helper.genNearlyOrdered(n, 1000)
 const arr2 = JSON.parse(JSON.stringify(arr))
 const arr3 = JSON.parse(JSON.stringify(arr))

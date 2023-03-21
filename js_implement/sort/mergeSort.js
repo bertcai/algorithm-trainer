@@ -1,18 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.mergeSort = void 0;
+var insertionSort_1 = require("./insertionSort");
 var mergeSort = function (arr, n) {
     __mergeSort(arr, 0, n - 1);
 };
 exports.mergeSort = mergeSort;
 var __mergeSort = function (arr, l, r) {
-    if (l >= r) {
+    if (r - l <= 15) {
+        (0, insertionSort_1.insertionSort)(arr, l, r);
         return;
     }
     var mid = Math.floor((l + r) / 2);
     __mergeSort(arr, l, mid);
     __mergeSort(arr, mid + 1, r);
-    __merge(arr, l, mid, r);
+    if (arr[mid] > arr[mid + 1])
+        __merge(arr, l, mid, r);
 };
 var __merge = function (arr, l, mid, r) {
     var aux = [];

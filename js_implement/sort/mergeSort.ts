@@ -1,15 +1,18 @@
+import { insertionSort } from "./insertionSort"
+
 export const mergeSort = <T>(arr: T[], n: number) => {
     __mergeSort(arr, 0, n - 1)
 }
 
 const __mergeSort = <T>(arr: T[], l: number, r: number) => {
-    if (l >= r) {
+    if (r - l <= 15) {
+        insertionSort(arr, l, r)
         return
     }
     let mid = Math.floor((l + r) / 2)
     __mergeSort(arr, l, mid)
     __mergeSort(arr, mid + 1, r)
-    __merge(arr, l, mid, r)
+    if (arr[mid] > arr[mid + 1]) __merge(arr, l, mid, r)
 }
 
 const __merge = <T>(arr: T[], l: number, mid: number, r: number) => {
