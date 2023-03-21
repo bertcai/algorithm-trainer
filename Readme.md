@@ -45,3 +45,36 @@ Insertion Sort : 0.619047148 s
 Bubble Sort : 1.25344893 s
 Shell Sort : 0.00564654 s
 ```
+
+#### nlogn 排序
+
++ 归并排序
+    + 递归思路
+        + ```js
+            const mergeSort = (arr,n)=>{
+                __mergeSort(arr,0,n-1);
+            }
+            const __mergeSort = (arr,l,r)=>{
+                if(l>=r){
+                    return;
+                }
+                let mid = Math.floor((l+r)/2);
+                __mergeSort(arr,l,mid);
+                __mergeSort(arr,mid+1,r);
+                __merge(arr,l,mid,r);
+            }
+            ```
+        + 优化
+            + 对于小规模数组，使用插入排序
+            + 对于arr[mid]<=arr[mid+1]的情况，不进行merge，因为此时数组已经有序
+            + 对于arr[mid]>arr[mid+1]的情况，进行merge
+    + 非递归思路，也可以使用递归思路的优化
+        + ```js
+            const mergeSort = (arr,n)=>{
+                for(let sz=1;sz<=n;sz+=sz){
+                    for(let i=0;i+sz<n;i+=sz+sz){
+                        __merge(arr,i,i+sz-1,Math.min(i+sz+sz-1,n-1));
+                    }
+                }
+            }
+            ```
