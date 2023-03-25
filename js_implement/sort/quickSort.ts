@@ -1,3 +1,5 @@
+import { insertionSort } from "./insertionSort"
+
 /**
  * 对泛型数组 arr 进行快速排序
  * @param arr 待排序的数组
@@ -14,7 +16,8 @@ export const quickSort = <T>(arr: T[], n: number) => {
  * @param r 数组右边界
  */
 const __quickSort = <T>(arr: T[], l: number, r: number) => {
-    if (l >= r) {
+    if (r - l <= 100000) { // 当区间长度小于等于 15 时，使用插入排序
+        insertionSort(arr, l, r)
         return
     }
     const p = __partition(arr, l, r) // 将区间 [l, r] 分为两个部分
@@ -30,18 +33,15 @@ const __quickSort = <T>(arr: T[], l: number, r: number) => {
  * @returns 返回分割后中轴元素的下标
  */
 const __partition = <T>(arr: T[], l: number, r: number): number => {
-    const v = arr[l] // 选择第一个元素作为中轴元素
+    const randomIndex = Math.floor(Math.random() * (r - l + 1)) + l;
+    const v = arr[randomIndex] // 选取区间中的一个元素作为中轴元素
     let j = l; // 初始化 j 指向区间左边界
     for (let i = l + 1; i <= r; i++) { // i 从区间左边界的下一个元素开始扫描
         if (arr[i] < v) { // 如果当前元素小于中轴元素，将其与 j+1 处的元素交换位置
-            let temp = arr[j + 1]
-            arr[j + 1] = arr[i]
-            arr[i] = temp
+            [arr[j + 1], arr[i]] = [arr[i], arr[j + 1]]
             j++
         }
     }
-    let temp = arr[j] // 将中轴元素放到 j 的位置上
-    arr[j] = arr[l]
-    arr[l] = temp
+    [arr[l], arr[j]] = [arr[j], arr[l]] // 将中轴元素与 j 处的元素交换位置 
     return j // 返回中轴元素的下标
 }

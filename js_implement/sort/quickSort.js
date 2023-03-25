@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.quickSort = void 0;
+var insertionSort_1 = require("./insertionSort");
 /**
  * 对泛型数组 arr 进行快速排序
  * @param arr 待排序的数组
@@ -17,7 +18,8 @@ exports.quickSort = quickSort;
  * @param r 数组右边界
  */
 var __quickSort = function (arr, l, r) {
-    if (l >= r) {
+    if (r - l <= 100000) { // 当区间长度小于等于 15 时，使用插入排序
+        (0, insertionSort_1.insertionSort)(arr, l, r);
         return;
     }
     var p = __partition(arr, l, r); // 将区间 [l, r] 分为两个部分
@@ -32,18 +34,16 @@ var __quickSort = function (arr, l, r) {
  * @returns 返回分割后中轴元素的下标
  */
 var __partition = function (arr, l, r) {
-    var v = arr[l]; // 选择第一个元素作为中轴元素
+    var _a, _b;
+    var randomIndex = Math.floor(Math.random() * (r - l + 1)) + l;
+    var v = arr[randomIndex]; // 选取区间中的一个元素作为中轴元素
     var j = l; // 初始化 j 指向区间左边界
     for (var i = l + 1; i <= r; i++) { // i 从区间左边界的下一个元素开始扫描
         if (arr[i] < v) { // 如果当前元素小于中轴元素，将其与 j+1 处的元素交换位置
-            var temp_1 = arr[j + 1];
-            arr[j + 1] = arr[i];
-            arr[i] = temp_1;
+            _a = [arr[i], arr[j + 1]], arr[j + 1] = _a[0], arr[i] = _a[1];
             j++;
         }
     }
-    var temp = arr[j]; // 将中轴元素放到 j 的位置上
-    arr[j] = arr[l];
-    arr[l] = temp;
+    _b = [arr[j], arr[l]], arr[l] = _b[0], arr[j] = _b[1]; // 将中轴元素与 j 处的元素交换位置 
     return j; // 返回中轴元素的下标
 };
