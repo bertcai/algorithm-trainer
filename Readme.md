@@ -78,3 +78,80 @@ Shell Sort : 0.00564654 s
                 }
             }
             ```
++ 快速排序
+    + 递归思路
+        + ```js
+            const quickSort = (arr,n)=>{
+                __quickSort(arr,0,n-1);
+            }
+            const __quickSort = (arr,l,r)=>{
+                if(l>=r){
+                    return;
+                }
+                let p = __partition(arr,l,r);
+                __quickSort(arr,l,p-1);
+                __quickSort(arr,p+1,r);
+            }
+            const __partition = (arr,l,r)=>{
+                let v = arr[l];
+                let j = l;
+                for(let i=l+1;i<=r;i++){
+                    if(arr[i]<v){
+                        swap(arr,j+1,i);
+                        j++;
+                    }
+                }
+                swap(arr,l,j);
+                return j;
+            }
+            ```
+        + 优化
+            + 对于小规模数组，使用插入排序
+            + 使用随机索引，避免数组有序时，快速排序退化为n^2
+            + 使用双路快排，避免数组中有大量重复元素时，快速排序退化为n^2
+                ```js
+                const __partition = (arr,l,r)=>{
+                    let v = arr[l];
+                    let i = l+1;
+                    let j = r;
+                    while(true){
+                        while(i<=r&&arr[i]<v){
+                            i++;
+                        }
+                        while(j>=l+1&&arr[j]>v){
+                            j--;
+                        }
+                        if(i>j){
+                            break;
+                        }
+                        swap(arr,i,j);
+                        i++;
+                        j--;
+                    }
+                    swap(arr,l,j);
+                    return j;
+                }
+                ```
+            + 使用三路快排，避免数组中有大量重复元素时，快速排序退化为n^2
+                ```js
+                const __partition = (arr,l,r)=>{
+                    let v = arr[l];
+                    let lt = l;
+                    let gt = r+1;
+                    let i = l+1;
+                    while(i<gt){
+                        if(arr[i]<v){
+                            swap(arr,i,lt+1);
+                            lt++;
+                            i++;
+                        }else if(arr[i]>v){
+                            swap(arr,i,gt-1);
+                            gt--;
+                        }else{
+                            i++;
+                        }
+                    }
+                    swap(arr,l,lt);
+                    return [lt,gt];
+                }
+                ```
