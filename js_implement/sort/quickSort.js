@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.quickSort = void 0;
+exports.quickSort3Ways = exports.quickSort = void 0;
 var insertionSort_1 = require("./insertionSort");
 /**
  * 对泛型数组 arr 进行快速排序
@@ -18,11 +18,11 @@ exports.quickSort = quickSort;
  * @param r 数组右边界
  */
 var __quickSort = function (arr, l, r) {
-    if (r - l <= 100000) { // 当区间长度小于等于 15 时，使用插入排序
+    if (r - l <= 15) { // 当区间长度小于等于 15 时，使用插入排序
         (0, insertionSort_1.insertionSort)(arr, l, r);
         return;
     }
-    var p = __partition(arr, l, r); // 将区间 [l, r] 分为两个部分
+    var p = __partition2(arr, l, r); // 将区间 [l, r] 分为两个部分
     __quickSort(arr, l, p - 1); // 分别对左右两部分进行递归
     __quickSort(arr, p + 1, r);
 };
@@ -46,4 +46,60 @@ var __partition = function (arr, l, r) {
     }
     _b = [arr[j], arr[l]], arr[l] = _b[0], arr[j] = _b[1]; // 将中轴元素与 j 处的元素交换位置 
     return j; // 返回中轴元素的下标
+};
+var __partition2 = function (arr, l, r) {
+    var _a, _b, _c;
+    var randomIndex = Math.floor(Math.random() * (r - l + 1)) + l;
+    _a = [arr[randomIndex], arr[l]], arr[l] = _a[0], arr[randomIndex] = _a[1]; // 将中轴元素与 l 处的元素交换位置
+    var v = arr[l]; // 选取区间中的一个元素作为中轴元素
+    var i = l + 1, j = r;
+    while (true) {
+        while (i <= r && arr[i] < v)
+            i++;
+        while (j >= l + 1 && arr[j] > v)
+            j--;
+        if (i > j)
+            break;
+        _b = [arr[j], arr[i]], arr[i] = _b[0], arr[j] = _b[1];
+        i++;
+        j--;
+    }
+    _c = [arr[j], arr[l]], arr[l] = _c[0], arr[j] = _c[1]; // 将中轴元素与 j 处的元素交换位置
+    return j; // 返回中轴元素的下标
+};
+var quickSort3Ways = function (arr, n) {
+    __quickSort3Ways(arr, 0, n - 1);
+};
+exports.quickSort3Ways = quickSort3Ways;
+var __quickSort3Ways = function (arr, l, r) {
+    if (r - l <= 15) { // 当区间长度小于等于 15 时，使用插入排序
+        (0, insertionSort_1.insertionSort)(arr, l, r);
+        return;
+    }
+    var _a = __partition3(arr, l, r), lt = _a[0], gt = _a[1]; // 将区间 [l, r] 分为三个部分
+    __quickSort3Ways(arr, l, lt - 1); // 分别对左中右三部分进行递归
+    __quickSort3Ways(arr, gt, r);
+};
+var __partition3 = function (arr, l, r) {
+    var _a, _b, _c, _d;
+    var randomIndex = Math.floor(Math.random() * (r - l + 1)) + l;
+    _a = [arr[randomIndex], arr[l]], arr[l] = _a[0], arr[randomIndex] = _a[1]; // 将中轴元素与 l 处的元素交换位置
+    var v = arr[l]; // 选取区间中的一个元素作为中轴元素
+    var lt = l, gt = r + 1, i = l + 1;
+    while (i < gt) {
+        if (arr[i] < v) {
+            _b = [arr[lt + 1], arr[i]], arr[i] = _b[0], arr[lt + 1] = _b[1];
+            lt++;
+            i++;
+        }
+        else if (arr[i] > v) {
+            _c = [arr[gt - 1], arr[i]], arr[i] = _c[0], arr[gt - 1] = _c[1];
+            gt--;
+        }
+        else {
+            i++;
+        }
+    }
+    _d = [arr[lt], arr[l]], arr[l] = _d[0], arr[lt] = _d[1]; // 将中轴元素与 lt 处的元素交换位置
+    return [lt, gt]; // 返回中轴元素的下标
 };
