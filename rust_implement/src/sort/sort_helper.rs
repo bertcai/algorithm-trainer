@@ -24,13 +24,8 @@ pub fn generate_nearly_ordered_array(n: usize, swap_times: usize) -> Vec<i32> {
     arr
 }
 // 用于测试排序算法的正确性
-pub fn is_sorted(arr: &Vec<i32>) -> bool {
-    for i in 0..arr.len() - 1 {
-        if arr[i] > arr[i + 1] {
-            return false;
-        }
-    }
-    true
+pub fn is_sorted<T: PartialOrd>(arr: &[T]) -> bool {
+    arr.windows(2).all(|w| w[0] <= w[1])
 }
 // 打印一个数组
 pub fn print_array(arr: &Vec<i32>) {
@@ -44,10 +39,10 @@ pub fn test_sort(sort_name: &str, sort: fn(&mut Vec<i32>), arr: &mut Vec<i32>) {
     let start_time = Instant::now();
     sort(arr);
     let end_time = Instant::now();
-    assert!(is_sorted(arr));
     if arr.len() < 100 {
         print_array(arr);
     }
+    assert!(is_sorted(arr));
     println!(
         "{} : {} s",
         sort_name,

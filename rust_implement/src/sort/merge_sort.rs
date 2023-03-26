@@ -6,14 +6,19 @@ pub fn merge_sort(arr: &mut Vec<i32>) {
 
 pub fn merge_sort_bu(arr: &mut Vec<i32>) {
     let n = arr.len();
-    for sz in 1..n {
+    for sz in 1..=n {
         for i in (0..n - sz).step_by(sz + sz) {
-            __merge(arr, i, i + sz - 1, std::cmp::min(i + sz + sz - 1, n - 1));
+            if arr[i + sz - 1] > arr[i + sz] {
+                __merge(arr, i, i + sz - 1, std::cmp::min(i + sz + sz - 1, n - 1));
+            }
         }
     }
 }
 
 fn __merge_sort(arr: &mut Vec<i32>, l: usize, r: usize) {
+    if l >= r {
+        return;
+    }
     if r - l <= 15 {
         insertion_sort_range(arr, l, r);
         return;
