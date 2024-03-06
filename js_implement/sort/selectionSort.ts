@@ -7,8 +7,11 @@ export const selectionSort = <T>(arr: T[], n: number) => {
                 minIndex = j
             }
         }
-        temp = arr[i]
-        arr[i] = arr[minIndex]
-        arr[minIndex] = temp
+        if (minIndex !== i) {
+            temp = arr[i]
+            arr[i] = arr[minIndex]
+            arr[minIndex] = temp
+        }
     }
+    return arr
 }
