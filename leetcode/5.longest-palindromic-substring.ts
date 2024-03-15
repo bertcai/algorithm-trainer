@@ -6,28 +6,39 @@
 
 // @lc code=start
 function longestPalindrome(s: string): string {
-    let dp: boolean[][] = [];
-    let max: number = 0;
-    let result: string = '';
-    for (let i = 0; i < s.length; i++) {
-        dp[i] = [];
-        for (let j = 0; j < s.length; j++) {
-            dp[i][j] = false;
+    // 求能使dp[i][j] 为 true 时 j-i 的最大差值
+    // 状态转移方程 dp[i][j] = dp[i+1][j-1] && s[i] === s[j] 
+    let dp: boolean[][] = []
+    const len = s.length
+    for (let i = 0; i < len; i++) {
+        dp[i] = []
+    }
+    for (let i = 0; i < len; i++) {
+        dp[i][i] = true
+    }
+    let st = 0, end = 0;
+
+    for (let i = 0; i < len - 1; i++) {
+        if (s[i] === s[i + 1]) {
+            dp[i][i + 1] = true
+            st = i;
+            end = i + 1
         }
     }
-    // 状态转移方程：dp[i][j] = dp[i - 1][j + 1] && s[i] === s[j]
-    for (let i = 0; i < s.length; i++) {
-        for (let j = 0; j <= i; j++) {
-            if (s[i] === s[j] && (i - j <= 2 || dp[i - 1][j + 1])) {
-                dp[i][j] = true;
-                if (i - j + 1 > max) {
-                    max = i - j + 1;
-                    result = s.substring(j, i + 1);
+
+    for (let n = 3; n <= len; n++) {
+        for (let i = 0; i <= len - n; i++) {
+            let j = i + n - 1
+            if (dp[i + 1][j - 1]) {
+                if (s[i] === s[j]) {
+                    dp[i][j] = true
+                    st = i;
+                    end = j;
                 }
             }
         }
     }
-    return result;
+    return s.substring(st, end + 1)
 };
 // @lc code=end
 
