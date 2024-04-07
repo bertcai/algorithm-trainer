@@ -18,27 +18,26 @@
  */
 
 function mergeTwoLists(list1: ListNode | null, list2: ListNode | null): ListNode | null {
-    let cur1 = list1;
-    let cur2 = list2;
-    let result = new ListNode();
-    let cur = result;
-    while (cur1 && cur2) {
-        if (cur1.val < cur2.val) {
-            cur.next = cur1;
-            cur1 = cur1.next;
+    let dummy = new ListNode()
+    let p = dummy
+    let p1 = list1, p2 = list2
+    while (p1 && p2) {
+        if (p1.val < p2.val) {
+            p.next = p1
+            p1 = p1.next
         } else {
-            cur.next = cur2;
-            cur2 = cur2.next;
+            p.next = p2
+            p2 = p2.next
         }
-        cur = cur.next;
+        p = p.next
     }
-    if (cur1) {
-        cur.next = cur1;
+    if (p1) {
+        p.next = p1
     }
-    if (cur2) {
-        cur.next = cur2;
+    if (p2) {
+        p.next = p2
     }
-    return result.next;
+    return dummy.next
 };
 // @lc code=end
 
