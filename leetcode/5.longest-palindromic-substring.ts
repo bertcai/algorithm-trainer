@@ -6,39 +6,22 @@
 
 // @lc code=start
 function longestPalindrome(s: string): string {
-    // 求能使dp[i][j] 为 true 时 j-i 的最大差值
-    // 状态转移方程 dp[i][j] = dp[i+1][j-1] && s[i] === s[j] 
-    let dp: boolean[][] = []
-    const len = s.length
-    for (let i = 0; i < len; i++) {
-        dp[i] = []
-    }
-    for (let i = 0; i < len; i++) {
-        dp[i][i] = true
-    }
-    let st = 0, end = 0;
-
-    for (let i = 0; i < len - 1; i++) {
-        if (s[i] === s[i + 1]) {
-            dp[i][i + 1] = true
-            st = i;
-            end = i + 1
+    const palindrome = (s, l, r) => {
+        while (l >= 0 && r < s.length && s[l] === s[r]) {
+            l--
+            r++
         }
+        return s.substring(l + 1, r)
     }
 
-    for (let n = 3; n <= len; n++) {
-        for (let i = 0; i <= len - n; i++) {
-            let j = i + n - 1
-            if (dp[i + 1][j - 1]) {
-                if (s[i] === s[j]) {
-                    dp[i][j] = true
-                    st = i;
-                    end = j;
-                }
-            }
-        }
+    let res = ""
+    for (let i = 0; i < s.length; i++) {
+        let s1 = palindrome(s, i, i)
+        let s2 = palindrome(s, i, i + 1)
+        res = res.length > s1.length ? res : s1
+        res = res.length > s2.length ? res : s2
     }
-    return s.substring(st, end + 1)
+    return res
 };
 // @lc code=end
 
