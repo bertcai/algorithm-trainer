@@ -6,20 +6,31 @@
 
 // @lc code=start
 function subsets(nums: number[]): number[][] {
-    const len = nums.length
     const res: number[][] = []
-    const subset: number[] = []
-    dfs(0)
+    const track: number[] = []
 
-    function dfs(nth) {
-        res.push(subset.slice())
+    // const backtrack = (start) => {
+    //     res.push([...track])
+    //     for (let i = start; i < nums.length; i++) {
+    //         track.push(nums[i])
+    //         backtrack(i + 1)
+    //         track.pop()
+    //     }
+    // }
 
-        for (let i = nth; i < len; i++) {
-            subset.push(nums[i])
-            dfs(i + 1)
-            subset.pop()
+    const backtrack = (i) => {
+        if (i == nums.length) {
+            res.push([...track]);
+            return;
         }
+        track.push(nums[i])
+        backtrack(i + 1)
+        track.pop()
+
+        backtrack(i + 1)
     }
+
+    backtrack(0)
     return res
 };
 // @lc code=end

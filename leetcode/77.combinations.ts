@@ -7,20 +7,19 @@
 // @lc code=start
 function combine(n: number, k: number): number[][] {
     const res: number[][] = []
-    const subset: number[] = []
+    const track: number[] = []
 
-    dfs(1)
-    function dfs(nth) {
-        if (subset.length === k) {
-            res.push(subset.slice())
-            return
+    const backtrack = (start) => {
+        if (track.length === k) {
+            res.push([...track])
         }
-        for (let i = nth; i <= n; i++) {
-            subset.push(i)
-            dfs(i + 1)
-            subset.pop()
+        for (let i = start; i <= n; i++) {
+            track.push(i)
+            backtrack(i + 1)
+            track.pop()
         }
     }
+    backtrack(1)
     return res
 };
 // @lc code=end

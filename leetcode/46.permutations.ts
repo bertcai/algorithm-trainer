@@ -6,27 +6,28 @@
 
 // @lc code=start
 function permute(nums: number[]): number[][] {
-    const len = nums.length
-    const curArr: number[] = []
-    const res: number[][] = []
-    const visited = {}
+    let res: number[][] = []
+    let track = []
+    let used = new Array(nums.length).fill(false)
 
-    function dfs(nth) {
-        if (nth === len) {
-            res.push(curArr.slice())
-            return
+    const backtrack = (nums, track, used) => {
+        if (track.length === nums.length) {
+            res.push([...track]) // push一个拷贝，否则track最后会pop成一个空数组
         }
-        for (let i = 0; i < len; i++) {
-            if (!visited[nums[i]]) {
-                visited[nums[i]] = 1
-                curArr.push(nums[i])
-                dfs(nth + 1)
-                curArr.pop()
-                visited[nums[i]] = 0
+
+        for (let i = 0; i < nums.length; i++) {
+            if (used[i]) {
+                continue
             }
+            track.push(nums[i])
+            used[i] = true
+            backtrack(nums, track, used)
+            track.pop()
+            used[i] = false
         }
     }
-    dfs(0)
+
+    backtrack(nums, track, used)
     return res
 };
 // @lc code=end
