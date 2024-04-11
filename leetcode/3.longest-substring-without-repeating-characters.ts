@@ -6,34 +6,25 @@
 
 // @lc code=start
 function lengthOfLongestSubstring(s: string): number {
-    // let max = 0;
-    // const sarr = s.split('');
-    // let temp = [] as string[];
-    // for (let i = 0; i < sarr.length; i++) {
-    //     if(temp.includes(sarr[i])) {
-    //         max = Math.max(max, temp.length);
-    //         temp = temp.slice(temp.indexOf(sarr[i]) + 1)
-    //     }
-    //     temp.push(sarr[i]);
-    // }
-    // return Math.max(max, temp.length);
-
-    // better solution
-    let max = 0;
-    let window = new Set();
-    let left = 0;
-    let right = 0;
+    const window = {}
+    let left = 0, right = 0
+    let max = 0
     while (right < s.length) {
-        const char = s[right];
-        while (window.has(char)) {
-            window.delete(s[left]);
-            left++;
+        let c = s[right]
+        right++
+        if (window[c] !== undefined) {
+            window[c]++
+        } else {
+            window[c] = 1
         }
-        window.add(char);
-        max = Math.max(max, window.size);
-        right++;
+        while (window[c] > 1) {
+            let d = s[left]
+            window[d]--
+            left++
+        }
+        max = Math.max(max, right - left)
     }
-    return max;
+    return max
 };
 // @lc code=end
 
