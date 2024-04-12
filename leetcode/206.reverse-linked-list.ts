@@ -18,15 +18,13 @@
  */
 
 function reverseList(head: ListNode | null): ListNode | null {
-    let pre = null
-    let cur = head
-    while (cur) {
-        let next = cur.next
-        cur.next = pre
-        pre = cur
-        cur = next
+    if (head === null || head.next === null) {
+        return head
     }
-    return pre
+    let last = reverseList(head.next)
+    head.next.next = head
+    head.next = null
+    return last
 };
 // @lc code=end
 
