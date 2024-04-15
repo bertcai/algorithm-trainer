@@ -7,31 +7,34 @@
 // @lc code=start
 function threeSum(nums: number[]): number[][] {
     nums = nums.sort((a, b) => a - b)
-    const result: number[][] = []
-    let cur1, cur2
-    for (let i = 0; i < nums.length - 2; i++) {
-        let temp = nums[i]
-        cur1 = i + 1
-        cur2 = nums.length - 1
-        if (i > 0 && nums[i] === nums[i - 1]) {
-            continue
-        }
-        while (cur1 < cur2) {
-            if (temp + nums[cur1] + nums[cur2] === 0) {
-                result.push([temp, nums[cur1], nums[cur2]])
-                while (cur2 > cur1 && nums[cur2] == nums[cur2 - 1]) cur2--;
-                while (cur2 > cur1 && nums[cur1] == nums[cur1 + 1]) cur1++;
-                cur1++
-                cur2--
-                continue
-            } else if (temp + nums[cur1] + nums[cur2] > 0) {
-                cur2--
+    const twoSum = (nums, start, target) => {
+        let low = start, high = nums.length - 1
+        const res: number[][] = []
+        while (low < high) {
+            const sum = nums[low] + nums[high]
+            const left = nums[low], right = nums[high]
+            if (sum < target) {
+                while (low < high && nums[low] === left) low++
+            } else if (sum > target) {
+                while (low < high && nums[high] === right) high--
             } else {
-                cur1++
+                res.push([nums[low], nums[high]])
+                while (low < high && nums[low] === left) low++
+                while (low < high && nums[high] === right) high--
             }
         }
+        return res
     }
-    return result
+    const res: number[][] = []
+    for (let i = 0; i < nums.length; i++) {
+        const target2 = 0 - nums[i]
+        let cache = nums[i]
+        let temp = twoSum(nums, i + 1, target2)
+        temp = temp.map(item => [nums[i], ...item])
+        res.push(...temp)
+        while (i + 1 < nums.length && nums[i + 1] === cache) i++
+    }
+    return res
 }
 // @lc code=end
 
