@@ -1,5 +1,4 @@
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class MyArrayList<E> {
@@ -11,11 +10,13 @@ public class MyArrayList<E> {
     this(INIT_CAP);
   }
 
+  @SuppressWarnings("unchecked")
   public MyArrayList(int initCapacity) {
     data = (E[]) new Object[initCapacity];
     size = 0;
   }
 
+  @SuppressWarnings("unchecked")
   private void resize(int newCap) {
     E[] temp = (E[]) new Object[newCap];
     for (int i = 0; i < size; i++) {
@@ -24,6 +25,7 @@ public class MyArrayList<E> {
     data = temp;
   }
 
+  @SuppressWarnings("unused")
   private void display() {
     System.out.println("size = " + size + " cap = " + data.length);
     System.out.println(Arrays.toString(data));
@@ -137,7 +139,6 @@ public class MyArrayList<E> {
     arr.remove(3);
     arr.add(1, 9);
     arr.addFirst(100);
-    int val = arr.removeLast();
     for (int i = 0; i < arr.size(); i++) {
       System.out.println(arr.get(i));
     }

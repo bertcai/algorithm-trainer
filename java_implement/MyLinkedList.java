@@ -1,13 +1,13 @@
 import java.util.NoSuchElementException;
 
 public class MyLinkedList<E> {
-  final private Node<E> head, tail;
+  final private Node head, tail;
   private int size;
 
-  private class Node<E> {
+  private class Node {
     private E data;
-    private Node<E> next;
-    private Node<E> prev;
+    private Node next;
+    private Node prev;
 
     public Node(E data) {
       this.data = data;
@@ -17,8 +17,8 @@ public class MyLinkedList<E> {
   }
 
   public MyLinkedList() {
-    head = new Node<E>(null);
-    tail = new Node<E>(null);
+    head = new Node(null);
+    tail = new Node(null);
     head.next = tail;
     tail.prev = head;
     size = 0;
@@ -44,9 +44,9 @@ public class MyLinkedList<E> {
     }
   }
 
-  public Node<E> getNode(int index) {
+  public Node getNode(int index) {
     checkElementIndex(index);
-    Node<E> cur = head.next;
+    Node cur = head.next;
     for (int i = 0; i < index; i++) {
       cur = cur.next;
     }
@@ -55,8 +55,8 @@ public class MyLinkedList<E> {
 
   // addAtIndex an element
   public void addAtTail(E e) {
-    Node<E> newNode = new Node<E>(e);
-    Node<E> last = tail.prev;
+    Node newNode = new Node(e);
+    Node last = tail.prev;
     last.next = newNode;
     newNode.next = tail;
     newNode.prev = last;
@@ -65,7 +65,7 @@ public class MyLinkedList<E> {
   }
 
   public void addAtHead(E e) {
-    Node<E> newNode = new Node<E>(e);
+    Node newNode = new Node(e);
     newNode.next = head.next;
     newNode.prev = head;
     head.next.prev = newNode;
@@ -75,9 +75,9 @@ public class MyLinkedList<E> {
 
   public void addAtIndex(int index, E e) {
     checkPositionIndex(index);
-    Node<E> newNode = new Node<E>(e);
-    Node<E> cur = getNode(index);
-    Node<E> curPrev = cur.prev;
+    Node newNode = new Node(e);
+    Node cur = getNode(index);
+    Node curPrev = cur.prev;
     newNode.prev = curPrev;
     curPrev.next = newNode;
     newNode.next = cur;
@@ -87,7 +87,7 @@ public class MyLinkedList<E> {
 
   public E deleteAtIndex(int index) {
     checkElementIndex(index);
-    Node<E> deleteNode = getNode(index);
+    Node deleteNode = getNode(index);
     deleteNode.prev.next = deleteNode.next;
     deleteNode.next.prev = deleteNode.prev;
     size--;
@@ -96,8 +96,8 @@ public class MyLinkedList<E> {
 
   public E removeFirst() {
     checkElementIndex(0);
-    Node<E> delNode = head.next;
-    Node<E> delNodeNext = delNode.next;
+    Node delNode = head.next;
+    Node delNodeNext = delNode.next;
     head.next = delNodeNext;
     delNodeNext.prev = head;
 
@@ -113,8 +113,8 @@ public class MyLinkedList<E> {
       throw new NoSuchElementException();
     }
 
-    Node<E> delNode = tail.prev;
-    Node<E> delNodePrev = delNode.prev;
+    Node delNode = tail.prev;
+    Node delNodePrev = delNode.prev;
     tail.prev = delNodePrev;
     delNodePrev.next = tail;
 
@@ -127,7 +127,7 @@ public class MyLinkedList<E> {
 
   public E get(int index) {
     checkElementIndex(index);
-    Node<E> cur = getNode(index);
+    Node cur = getNode(index);
 
     return cur.data;
   }
@@ -152,7 +152,7 @@ public class MyLinkedList<E> {
    */
   public E set(int index, E e) {
     checkElementIndex(index);
-    Node<E> cur = getNode(index);
+    Node cur = getNode(index);
     E oldVal = cur.data;
     cur.data = e;
     return oldVal;
@@ -168,7 +168,7 @@ public class MyLinkedList<E> {
 
   private void display() {
     System.out.println("size = " + size);
-    for (Node<E> p = head.next; p != tail; p = p.next) {
+    for (Node p = head.next; p != tail; p = p.next) {
       System.out.print(p.data + " <-> ");
     }
     System.out.println("null");
