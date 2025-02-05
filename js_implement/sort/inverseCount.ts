@@ -7,7 +7,7 @@ export const inverseCount = <T>(arr: T[], n: number) => {
     return inverseCountHelper(arr, 0, n - 1)
 }
 
-const inverseCountHelper = <T>(arr: T[], l: number, r: number) => {
+const inverseCountHelper = <T>(arr: T[], l: number, r: number): number => {
     if (l >= r) return 0
     let mid = Math.floor((l + r) / 2)
     let res = inverseCountHelper(arr, l, mid) + inverseCountHelper(arr, mid + 1, r)
