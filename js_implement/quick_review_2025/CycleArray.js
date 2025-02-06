@@ -2,11 +2,6 @@
  * 循环数组, 左开右闭
  */
 class CycleArray {
-  size = 1;
-  array: any[] = [];
-  start = 0;
-  end = 0;
-  count = 0;
   constructor(size = 1) {
     this.size = size;
     this.array = [];
@@ -15,8 +10,8 @@ class CycleArray {
     this.count = 0;
   }
 
-  resize(newSize: number) {
-    let newArray: any[] = [];
+  resize(newSize) {
+    let newArray = [];
     for (let i = 0; i < newSize; i++) {
       newArray.push(this.array[(this.start + i) % this.size]);
     }
@@ -34,7 +29,7 @@ class CycleArray {
     return this.count === 0;
   }
 
-  addFirst(val: number) {
+  addFirst(val) {
     if (this.isFull()) {
       this.resize(this.size * 2);
     }
@@ -49,13 +44,13 @@ class CycleArray {
     }
     this.array[this.start] = null;
     this.start = (this.start + 1) % this.size;
-    this.count--
+    this.count--;
     if (this.count > 0 && this.count === this.size / 4) {
       this.resize(this.size / 2);
     }
   }
 
-  addLast(val: number) {
+  addLast(val) {
     if (this.isFull()) {
       this.resize(this.size * 2);
     }
