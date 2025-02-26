@@ -8,10 +8,10 @@ class MonotonicQueue {
   // 标准队列 API，向队尾加入元素
   push(elem) {
     this.q.push(elem)
-    while (this.maxQ.length && this.maxQ[this.maxQ.length - 1] <= elem) {
+    while (this.maxQ.length && this.maxQ[this.maxQ.length - 1] < elem) {
       this.maxQ.pop()
     }
-    while (this.maxQ.length && this.maxQ[this.maxQ.length - 1] >= elem) {
+    while (this.maxQ.length && this.maxQ[this.maxQ.length - 1] > elem) {
       this.minQ.pop()
     }
     this.maxQ.push(elem)
