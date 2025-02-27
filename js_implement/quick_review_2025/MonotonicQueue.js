@@ -11,7 +11,7 @@ class MonotonicQueue {
     while (this.maxQ.length && this.maxQ[this.maxQ.length - 1] < elem) {
       this.maxQ.pop()
     }
-    while (this.maxQ.length && this.maxQ[this.maxQ.length - 1] > elem) {
+    while (this.minQ.length && this.minQ[this.minQ.length - 1] > elem) {
       this.minQ.pop()
     }
     this.maxQ.push(elem)
@@ -24,7 +24,7 @@ class MonotonicQueue {
     if (n === this.maxQ[0]) {
       this.maxQ.shift()
     }
-    if (n === this.minQ) {
+    if (n === this.minQ[0]) {
       this.minQ.shift()
     }
   }
